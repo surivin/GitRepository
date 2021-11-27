@@ -13,21 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-        
-    - name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v3
-      with:
-        images: ghcr.io/${{ github.repository }}
-        tags: latest 
-         
-   
+           
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     # Connect to Azure Container Registry (ACR)
-    - uses: azure/docker-login@v1
+    - name: Build and push
+      uses: azure/docker-login@v1
       with:
         login-server: ${{ env.REGISTRY_NAME }}
         username: ${{ secrets.REGISTRY_USERNAME }} 
