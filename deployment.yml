@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: HelloAspnetCore-deployment
+  name: helloaspnetcore-deployment
 spec:
   selector:
     matchLabels:
-      app: HelloAspnetCore-pod
+      app: helloaspnetcore-pod
   template:
     metadata:
       labels:
-        app: HelloAspnetCore-pod
+        app: helloaspnetcore-pod
     spec:
       containers:
-      - name: HelloAspnetCore-container
+      - name: helloaspnetcore-container
         image: githubtestingreg.azurecr.io/helloaspnetcore
         resources:
           limits:
