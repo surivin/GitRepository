@@ -6,7 +6,7 @@ env:
   REGISTRY_NAME: githubactionstesting.azurecr.io
   CLUSTER_NAME: githubactionsdeploymenttestingcluster
   CLUSTER_RESOURCE_GROUP: gitHub-actions-testing-rg
-  APP_NAME: HelloAspnetCore
+  APP_NAME: helloaspnetcore
   
 jobs:
   build:
