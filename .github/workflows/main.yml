@@ -21,7 +21,7 @@ jobs:
         images: ghcr.io/${{ github.repository }}
         tags: latest
         
-    - name: Build and push
+    #- name: Build and push
      
         
     # Connect to Azure Container Registry (ACR)
