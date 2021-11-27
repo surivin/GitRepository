@@ -13,14 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    
-    
-    # Connect to Azure Container Registry (ACR)
-    - uses: azure/docker-login@v1
-      with:
-        login-server: ${{ env.REGISTRY_NAME }}
-        username: ${{ secrets.REGISTRY_USERNAME }} 
-        password: ${{ secrets.REGISTRY_PASSWORD }}
         
     - name: Docker meta
       id: meta
@@ -36,6 +28,12 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }} 
         
     
+    # Connect to Azure Container Registry (ACR)
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.REGISTRY_NAME }}
+        username: ${{ secrets.REGISTRY_USERNAME }} 
+        password: ${{ secrets.REGISTRY_PASSWORD }}
     # Container build and push to a Azure Container Registry (ACR)
     - run: |
         docker build . -t ${{ env.REGISTRY_NAME }}/${{ env.APP_NAME }}:${{ github.sha }}
