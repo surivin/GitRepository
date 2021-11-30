@@ -7,7 +7,7 @@ env:
   CLUSTER_NAME: my-kc
   CLUSTER_RESOURCE_GROUP: my-first-rg
   APP_NAME: helloaspnetcore
-  NAMESPACE: myfirstdeployment
+  NAMESPACE: default
   SECRET: akspullsecret
   IMG_TAG: v1
   
