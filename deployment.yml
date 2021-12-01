@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: helloaspnetcore-container
-        image: githubtestingreg.azurecr.io/helloaspnetcore
+        #image: githubtestingreg.azurecr.io/helloaspnetcore
         resources:
           limits:
             memory: "128Mi"
