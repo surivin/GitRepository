@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: helloaspnetcore
+  labels:
+    istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetcore
+  namespace: helloaspnetcore 
+  labels:
+    app:  aspnetcore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  aspnetcore
+  template:
+    metadata:
+      labels:
+        app:  aspnetcore
+    spec:
+      containers:
+        - name:  aspnetcore
+          image: <Image>
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: "200m"
+              memory: 200Mi
+            requests:
+              cpu: "100m"
+              memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  aspnetcore
+  namespace: helloaspnetcore
+  labels:
+    app:  aspnetcore
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app:  aspnetcore
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: helloaspnetcore-gateway
+  namespace: helloaspnetcore
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http-helloaspnetcore
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: helloaspnetcore-vservice
+  namespace: helloaspnetcore
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - helloaspnetcore-gateway
+  http:
+    - route:
+        - destination:
+            host:  aspnetcore
+            port:
+              number: 8080
