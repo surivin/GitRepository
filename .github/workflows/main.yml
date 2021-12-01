@@ -3,7 +3,7 @@ on: [push]
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  REGISTRY_NAME: https://githubtestingreg.azurecr.io
+  REGISTRY_NAME: githubtestingreg.azurecr.io
   CLUSTER_NAME: my-kc
   CLUSTER_RESOURCE_GROUP: my-first-rg
   APP_NAME: helloaspnetcore
@@ -60,7 +60,7 @@ jobs:
       with:
         manifests: |
           Deployment1.yml
-        images: '${{ env.REGISTRY_NAME }}/${{ env.APP_NAME }}:${{ github.sha }}'
+        images: 'https://${{ env.REGISTRY_NAME }}/${{ env.APP_NAME }}:${{ github.sha }}'
         imagepullsecrets: |
           ${{ env.SECRET }}
         namespace: ${{ env.NAMESPACE }}
