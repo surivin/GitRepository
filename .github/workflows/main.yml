@@ -60,7 +60,8 @@ jobs:
       with:
         manifests: |
           Deployment1.yml
-        images: '${{ env.REGISTRY_NAME }}/${{ env.APP_NAME }}:${{ github.sha }}'
+        images: | 
+          githubtestingreg.azurecr.io/helloaspnetcore:${{ github.sha }}
         imagepullsecrets: |
           ${{ env.SECRET }}
         namespace: ${{ env.NAMESPACE }}
