@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: bookclub
-          image: <Image>
+          #image: <Image>
           ports:
             - containerPort: 8080
             
