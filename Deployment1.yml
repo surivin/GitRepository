@@ -24,16 +24,10 @@ spec:
     spec:
       containers:
         - name: bookclub
-          image: fasttrackistio/bookclub:1.0.0
+          image: <Image>
           ports:
             - containerPort: 8080
-          env:
-            - name: moviesServiceUri
-              value: "http://movies-api-service.fast-track-istio.svc.cluster.local:3000"
-            - name: booksServiceUri
-              value: "http://books-api-service.fast-track-istio.svc.cluster.local:4000"
-            - name: independentServiceUri
-              value: "http://independent.australiaeast.azurecontainer.io:8080/"
+            
           resources:
             limits:
               cpu: "200m"
