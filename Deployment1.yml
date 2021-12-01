@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: bookclub
-          image: fasttrackistio/bookclub:1.0.0
+          image: githubtestingreg.azurecr.io/helloaspnetcore
           ports:
             - containerPort: 8080
             
