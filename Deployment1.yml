@@ -1,25 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fast-track-istio 
+  labels:
+    istio-injection: enabled
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aspnetcore
-  #namespace: default 
+  name: bookclub
+  namespace: fast-track-istio 
   labels:
-    app:  aspnetcore
+    app: bookclub
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  aspnetcore
+      app: bookclub
   template:
     metadata:
       labels:
-        app:  aspnetcore
+        app: bookclub
     spec:
       containers:
-        - name:  aspnetcore
-          image: <Image>
+        - name: bookclub
+          image: fasttrackistio/bookclub:1.0.0
           ports:
             - containerPort: 8080
+          env:
+            - name: moviesServiceUri
+              value: "http://movies-api-service.fast-track-istio.svc.cluster.local:3000"
+            - name: booksServiceUri
+              value: "http://books-api-service.fast-track-istio.svc.cluster.local:4000"
+            - name: independentServiceUri
+              value: "http://independent.australiaeast.azurecontainer.io:8080/"
           resources:
             limits:
               cpu: "200m"
@@ -31,29 +45,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name:  aspnetcore
-  #namespace: default
+  name: bookclub
+  namespace: fast-track-istio
   labels:
-    app:  aspnetcore
+    app: bookclub
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
-    app:  aspnetcore
+    app: bookclub
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: helloaspnetcore-gateway
-  #namespace: default
+  name: book-club-gateway
+  namespace: fast-track-istio
 spec:
   selector:
     istio: ingressgateway
   servers:
     - port:
         number: 80
-        name: http-helloaspnetcore
+        name: http-book-club-gateway
         protocol: HTTP
       hosts:
         - "*"
@@ -61,16 +75,16 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: helloaspnetcore-vservice
-  #namespace: default
+  name: book-club-vservice
+  namespace: fast-track-istio
 spec:
   hosts:
     - "*"
   gateways:
-    - helloaspnetcore-gateway
+    - book-club-gateway
   http:
     - route:
         - destination:
-            host:  aspnetcore
+            host: bookclub
             port:
               number: 8080
