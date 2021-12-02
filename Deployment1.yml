@@ -61,7 +61,7 @@ spec:
   servers:
     - port:
         number: 80
-        name: http-book-club-gateway
+        name: http-query
         protocol: HTTP
       hosts:
         - "*"
