@@ -63,6 +63,7 @@ spec:
         number: 80
         name: http-query
         protocol: HTTP
+        appProtocol: HTTP
       hosts:
         - "*"
 ---
