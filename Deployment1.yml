@@ -73,7 +73,7 @@ metadata:
   namespace: fast-track-istio
 spec:
   hosts:
-    - http://20.120.41.83
+    - 20.120.41.83
   gateways:
     - book-club-gateway
   http:
