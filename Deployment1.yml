@@ -79,7 +79,7 @@ spec:
   http:
   - match:
     - uri: 
-      prefix: /api
+        prefix: /api
     route:
       - destination:
           host: bookclub.fast-track-istio.svc.cluster.local
