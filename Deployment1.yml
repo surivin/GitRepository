@@ -80,8 +80,8 @@ spec:
   - match:
     - uri:
         prefix: /weatherforecast
-  route:
-    - destination:
-        host: bookclub
-        port:
-          number: 8080
+    route:
+      - destination:
+          host: bookclub
+          port:
+            number: 8080
