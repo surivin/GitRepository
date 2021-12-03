@@ -77,11 +77,8 @@ spec:
   gateways:
     - book-club-gateway
   http:
-  - match:
-    - uri:
-        prefix: /api
-    route:
-        - destination:
-            host: bookclub
-            port:
-              number: 8080
+  - route:
+    - destination:
+        host: bookclub
+        port:
+          number: 8080
