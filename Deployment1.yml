@@ -80,7 +80,7 @@ spec:
   - match:
     - uri:
         prefix: /api
-    - route:
+    route:
         - destination:
             host: bookclub
             port:
