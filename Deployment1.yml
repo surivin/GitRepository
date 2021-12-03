@@ -45,7 +45,7 @@ metadata:
     app: bookclub
 spec:
   ports:
-  - port: 80
+  - port: 8080
     targetPort: 80
   selector:
     app: bookclub
@@ -73,7 +73,7 @@ metadata:
   namespace: fast-track-istio
 spec:
   hosts:
-    - "20.120.41.83"
+    - "*"
   gateways:
     - book-club-gateway
   http:
@@ -84,4 +84,4 @@ spec:
         - destination:
             host: bookclub
             port:
-              number: 80
+              number: 8080
