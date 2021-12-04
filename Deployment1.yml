@@ -77,7 +77,14 @@ spec:
   gateways:
     - book-club-gateway
   http:
-  - route:
+  - match:
+    - uri:
+        prefix: /
+    - uri:
+        exact: /api
+    - uri:
+        prefix: /api
+    route:
     - destination:
         host: bookclub.fast-track-istio.svc.cluster.local
         port:
